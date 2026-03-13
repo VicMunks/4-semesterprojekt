@@ -69,7 +69,7 @@ public class AssemblyLineController : IAssetController
         throw new NotImplementedException();
     }
 
-    public Task SendCommand(string command = "12345")
+    public Task SendCommand(string command, string[] args)
     {
         Dictionary<string, string> payloadDictionary = new() { { "ProcessID", "123" } };
 

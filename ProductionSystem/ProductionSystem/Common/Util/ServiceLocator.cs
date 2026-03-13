@@ -9,7 +9,6 @@ public sealed class ServiceLocator
     public static ServiceLocator Instance { get; } = new ServiceLocator();
 
     private readonly List<Assembly> _pluginAssemblies = new();
-    private readonly Dictionary<Type, List<object>> _cache = new();
     private readonly Dictionary<Type, List<object>> _serviceRegistry = new();
 
     private ServiceLocator()
@@ -26,53 +25,61 @@ public sealed class ServiceLocator
             var asm = Assembly.LoadFrom(dll);
             _pluginAssemblies.Add(asm);
             Console.WriteLine($"loaded: {asm.FullName}");
-
-            if ( _serviceRegistry.TryGetValue( asm.GetType() ) )
-            {
-                _serviceRegistry[asm.GetType()].Add(asm.)
-            }
-
         }
     }
 
     public IReadOnlyList<T> LocateAll<T>() where T : class
     {
         var serviceType = typeof(T);
+        List<T> services = new List<T>();
 
-        if (_cache.TryGetValue(serviceType, out var cached))
+        // check if the type is in the registry 
+        if (_serviceRegistry.TryGetValue(serviceType, out var cached))
             return cached.Cast<T>().ToList();
 
-        var services = new List<T>();
 
         foreach (var asm in _pluginAssemblies.Append(Assembly.GetExecutingAssembly()))
         {
-            IEnumerable<Type> candidates;
+            IEnumerable<Type> types;
             try
             {
-                candidates = asm.GetTypes();
+                types = asm.GetTypes(); // contains all types found in the assembly
             }
             catch (ReflectionTypeLoadException ex)
             {
-                candidates = ex.Types.Where(t => t != null)!;
+                types = ex.Types.Where(t => t != null)!;
             }
 
-            foreach (var t in candidates)
+            foreach (var candidateType in types)
             {
-                if (t is null || t.IsAbstract || t.IsInterface)
+                if (!isCandidate(candidateType, serviceType))
                     continue;
 
-                if (!serviceType.IsAssignableFrom(t))
-                    continue;
-
-                // requires public parameterless ctor (or add your own factory/DI here)
-                if (Activator.CreateInstance(t) is T instance)
+                // Create the instance of the services 
+                // Requires public parameterless constructor
+                if (Activator.CreateInstance(candidateType) is T instance)
                 {
                     services.Add(instance);
                 }
             }
         }
 
-        _cache[serviceType] = services.Cast<object>().ToList();
+        _serviceRegistry[serviceType] = services.Cast<object>().ToList();
         return services;
+    }
+
+    /// <summary>
+    /// Check if "candidateType" is a candidate for being instanciated as Type "serviceType"
+    /// </summary>
+    /// <returns></returns>
+    private bool isCandidate(Type? candidateType, Type serviceType)
+    {
+        if (candidateType is null || candidateType.IsAbstract || candidateType.IsInterface)
+            return false;
+
+        if (!serviceType.IsAssignableFrom(candidateType))
+            return false;
+
+        return true;
     }
 }

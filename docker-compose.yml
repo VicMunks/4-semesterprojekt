@@ -3,7 +3,7 @@ version: '3.8'
 services:
   mqtt: 
     image: thmork/st4-mqtt:latest
-    ports: 
+    ports:   
       - 1883:1883
       - 9001:9001
   

@@ -4,6 +4,11 @@ using CommonAssetController;
 
 public class WarehouseController : IAssetController
 {
+    public Task SendCommand(string command, string[] args)
+    {
+        throw new NotImplementedException();
+    }
+
     Task<bool> IAssetController.Connect()
     {
         throw new NotImplementedException();
@@ -15,11 +20,6 @@ public class WarehouseController : IAssetController
     }
 
     Task<string> IAssetController.ReadStatus()
-    {
-        throw new NotImplementedException();
-    }
-
-    Task IAssetController.SendCommand(string command)
     {
         throw new NotImplementedException();
     }

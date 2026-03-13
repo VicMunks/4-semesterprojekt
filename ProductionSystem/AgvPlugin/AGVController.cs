@@ -1,4 +1,5 @@
 namespace AGVController;
+
 using CommonAssetController;
 using System.Net.Http;
 using System.Text;
@@ -33,8 +34,8 @@ public class AGVController : IAssetController
         return await response.Content.ReadAsStringAsync();
     }
 
-    public async Task SendCommand(string command)
+    public Task SendCommand(string command, string[] args)
     {
-		throw new NotImplementedException();
-	}
+        throw new NotImplementedException();
+    }
 }
