@@ -2,6 +2,7 @@
   <Project Path="AgvPlugin/AgvPlugin.csproj" />
   <Project Path="APIControllerPlugin/APIControllerPlugin.csproj" />
   <Project Path="AssemblyPlugin/AssemblyPlugin.csproj" />
+  <Project Path="Common/Common.csproj" />
   <Project Path="CommonAssetController/CommonAssetController.csproj" />
   <Project Path="CommonProductionHandler/CommonProductionHandler.csproj" />
   <Project Path="ProductionDataHandlerPlugin/ProductionDataHandlerPlugin.csproj" />
