@@ -9,13 +9,11 @@ using static System.Net.WebRequestMethods;
 public class AGVController : IAssetController
 {
     private readonly HttpClient httpClient;
-    private readonly string baseUrl;
+    private readonly string baseUrl = "http://localhost:8082/v1";
 
-    public AGVController(string baseUrl = "http://localhost:8082/v1" )
-
+    public AGVController()
 	{
         httpClient = new HttpClient();
-        this.baseUrl = baseUrl;
     }
 
     public async Task<bool> Connect()

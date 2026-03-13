@@ -1,0 +1,47 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <BaseOutputPath>bin\</BaseOutputPath>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <WarningLevel>0</WarningLevel>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <WarningLevel>0</WarningLevel>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <RepoPluginsDir>$(MSBuildThisFileDirectory)..\Plugins\</RepoPluginsDir>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CommonAssetController\CommonAssetController.csproj" />
+    <ProjectReference Include="..\Common\Common.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PluginProject Include="..\AgvPlugin\AgvPlugin.csproj" />
+    <PluginProject Include="..\AssemblyPlugin\AssemblyPlugin.csproj" />
+    <PluginProject Include="..\WarehousePlugin\WarehousePlugin.csproj" />
+  </ItemGroup>
+
+  <Target Name="BuildAndCopyPlugins" AfterTargets="Build">
+    <MSBuild Projects="@(PluginProject)"
+             Targets="Build"
+             Properties="Configuration=$(Configuration);TargetFramework=$(TargetFramework);OutputPath=bin\$(Configuration)\$(TargetFramework)\Plugins\;CopyLocalLockFileAssemblies=true" />
+    <RemoveDir Directories="$(RepoPluginsDir)" />
+    <MakeDir Directories="$(RepoPluginsDir)" />
+    <ItemGroup>
+      <PluginOutputFiles Include="..\*Plugin\bin\$(Configuration)\$(TargetFramework)\Plugins\*.dll" />
+      <PluginOutputFiles Include="..\*Plugin\bin\$(Configuration)\$(TargetFramework)\Plugins\*.deps.json" />
+    </ItemGroup>
+    <Copy SourceFiles="@(PluginOutputFiles)" DestinationFolder="$(RepoPluginsDir)" SkipUnchangedFiles="true" />
+  </Target>
+
+</Project>
