@@ -13,7 +13,8 @@ public sealed class ServiceLocator
 
     private ServiceLocator()
     {
-        var pluginsDir = Path.Combine(AppContext.BaseDirectory, "Plugins");
+        var pluginsDir = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", "Plugins"));
+        Console.WriteLine(pluginsDir);
         if (!Directory.Exists(pluginsDir))
         {
             Console.WriteLine("Could not find Plugins folder");
