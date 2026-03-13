@@ -4,7 +4,10 @@
   <Project Path="AssemblyPlugin/AssemblyPlugin.csproj" />
   <Project Path="CommonAssetController/CommonAssetController.csproj" />
   <Project Path="CommonProductionHandler/CommonProductionHandler.csproj" />
+  <Project Path="ProductionDataHandlerPlugin/ProductionDataHandlerPlugin.csproj" />
   <Project Path="ProductionHandlerPlugin/ProductionHandlerPlugin.csproj" />
   <Project Path="PluginHost/PluginHost.csproj" />
+  <Project Path="ProductionMonitoringPlugin/ProductionMonitoringPlugin.csproj" />
+  <Project Path="PubSubControllerPlugin/PubSubControllerPlugin.csproj" />
   <Project Path="WarehousePlugin/WarehousePlugin.csproj" />
 </Solution>
