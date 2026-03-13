@@ -5,6 +5,6 @@
   <Project Path="CommonAssetController/CommonAssetController.csproj" />
   <Project Path="CommonProductionHandler/CommonProductionHandler.csproj" />
   <Project Path="ProductionHandlerPlugin/ProductionHandlerPlugin.csproj" />
-  <Project Path="ProductionSystem/ProductionSystem.csproj" />
+  <Project Path="PluginHost/PluginHost.csproj" />
   <Project Path="WarehousePlugin/WarehousePlugin.csproj" />
 </Solution>
