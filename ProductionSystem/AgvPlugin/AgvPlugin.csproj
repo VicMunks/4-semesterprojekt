@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CommonAssetController\CommonAssetController.csproj" />
+    <ProjectReference Include="..\Common.AssetController\CommonAssetController.csproj" />
   </ItemGroup>
 
 </Project>

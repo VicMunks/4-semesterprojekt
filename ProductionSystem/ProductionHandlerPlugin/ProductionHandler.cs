@@ -1,9 +1,12 @@
-﻿using CommonAssetController;
+﻿using Common.Util;
+using Common.Data;
+
+using CommonAssetController;
 using CommonProductionHandler;
 
 namespace ProductionHandlerPlugin;
 
-public class ProductionHandler :IProductionHandler, IStopable
+public class ProductionHandler
 {
     private Dictionary<AssetEnum, IAssetController> _controllerRegistry;
 
@@ -30,6 +33,16 @@ public class ProductionHandler :IProductionHandler, IStopable
 
     public Task SendCommand(ProductionCommand command)
     {
+        switch (command.Name)
+        {
+            case "order":
+                OrderHandler.Instance.AddOrderCommandToQueue(command);
+            break;
+            
+            default:
+            break;
+        }
+
         var controllers = getAssetControllers();
         throw new NotImplementedException();
     }
