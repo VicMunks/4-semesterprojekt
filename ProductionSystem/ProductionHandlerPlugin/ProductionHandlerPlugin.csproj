@@ -9,7 +9,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Common.AssetController\CommonAssetController.csproj" />
     <ProjectReference Include="..\Common.ProductionHandler\CommonProductionHandler.csproj" />
+    <projectReference Include="..\Common.ProductionDataSource\Common.ProductionDataSource.csproj"/>
     <ProjectReference Include="..\Common\Common.csproj" />
   </ItemGroup>
-
 </Project>

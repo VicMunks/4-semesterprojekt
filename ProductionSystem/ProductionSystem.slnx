@@ -3,6 +3,7 @@
 
   <Project Path="Common/Common.csproj" />
   <Project Path="Common.AssetController/CommonAssetController.csproj" />
+  <Project Path="Common.ProductionDataSource/Common.ProductionDataSource.csproj" />
   <Project Path="Common.ProductionHandler/CommonProductionHandler.csproj" />
 
   <Project Path="AgvPlugin/AgvPlugin.csproj" />

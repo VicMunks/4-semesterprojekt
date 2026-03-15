@@ -3,12 +3,15 @@ using Common.Data;
 
 using CommonAssetController;
 using CommonProductionHandler;
+using Common.ProductionDataSource;
 
 namespace ProductionHandlerPlugin;
 
-public class ProductionHandler
+public class ProductionHandler : IProductionDataSource
 {
     private Dictionary<AssetEnum, IAssetController> _controllerRegistry;
+
+    public event EventHandler<ProductionEvent> EventHandler; // raise event on this, to notify ProductionDataSource
 
     public ProductionHandler()
     {
@@ -18,6 +21,8 @@ public class ProductionHandler
             _controllerRegistry.Add(controller.GetAssetEnum(), controller);
         }
     }
+
+
 
     public void StartProduction()
     {
@@ -34,6 +39,12 @@ public class ProductionHandler
         agv put items
         warehouse insert items
         */
+    }
+
+    private void ProductionComplete(ProductionEvent e)
+    {
+        // raise event like this, eg notify data handler and pass Production event
+        EventHandler.Invoke(this, e);
     }
 
     /// <summary>
