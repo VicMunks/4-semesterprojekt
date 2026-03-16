@@ -22,8 +22,6 @@ public class ProductionHandler : IProductionDataSource
         }
     }
 
-
-
     public void StartProduction()
     {
         /*

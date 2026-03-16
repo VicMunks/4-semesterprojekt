@@ -4,9 +4,9 @@
     using CommonAssetController;
     using CommonProductionHandler;
 
-    internal class Program
+    public class Program
     {
-        static async Task Main(string[] args)
+        public static void Main()
         {
             var controllers = ServiceLocator.Instance.LocateAll<IAssetController>();
             Console.WriteLine($"{controllers.Count}");

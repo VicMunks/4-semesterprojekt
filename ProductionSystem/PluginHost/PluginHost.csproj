@@ -29,10 +29,10 @@
     <PluginProject Include="..\AssemblyPlugin\AssemblyPlugin.csproj" />
     <PluginProject Include="..\WarehousePlugin\WarehousePlugin.csproj" />
     <PluginProject Include="..\PubSubControllerPlugin\PubSubControllerPlugin.csproj" />
-    <PluginProject Include="..\ProductionMonitoringPlugin\ProductionMonitoringPlugin.csproj" />
+    <PluginProject Include="..\ProductionMonitoringPlugin\MonitoringPlugin.csproj" />
     <PluginProject Include="..\ProductionHandlerPlugin\ProductionHandlerPlugin.csproj" />
-    <PluginProject Include="..\ProductionDataHandlerPlugin\ProductionDataHandlerPlugin.csproj" />
-    <PluginProject Include="..\APIControllerPlugin\APIControllerPlugin.csproj" />
+    <PluginProject Include="..\ProductionDataHandlerPlugin\DataHandlerPlugin.csproj" />
+    <PluginProject Include="..\APIControllerPlugin\RestAPIPlugin.csproj" />
   </ItemGroup>
 
   <Target Name="BuildAndCopyPlugins" AfterTargets="Build">
