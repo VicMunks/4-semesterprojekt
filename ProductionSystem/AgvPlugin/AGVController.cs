@@ -9,13 +9,11 @@ using static System.Net.WebRequestMethods;
 public class AGVController : IAssetController
 {
     private readonly HttpClient httpClient;
-    private readonly string baseUrl;
+    private readonly string baseUrl = "http://localhost:8082/v1";
 
-    public AGVController(string baseUrl = "http://localhost:8082/v1" )
-
+    public AGVController()
 	{
         httpClient = new HttpClient();
-        this.baseUrl = baseUrl;
     }
 
     public async Task<bool> Connect()
@@ -28,6 +26,11 @@ public class AGVController : IAssetController
         throw new NotImplementedException();
     }
 
+    public AssetEnum GetAssetEnum()
+    {
+        return AssetEnum.agv;
+    }
+
     public async Task<string> ReadStatus()
     {
         var response = await httpClient.GetAsync($"{baseUrl}/status");
@@ -35,6 +38,11 @@ public class AGVController : IAssetController
     }
 
     public Task SendCommand(string command, string[] args)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task SendCommand(AssetCommand command)
     {
         throw new NotImplementedException();
     }
