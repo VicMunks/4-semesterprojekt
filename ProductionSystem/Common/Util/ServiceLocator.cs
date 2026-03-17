@@ -61,6 +61,11 @@ public sealed class ServiceLocator
         return services;
     }
 
+    public IReadOnlyList<Assembly> GetPluginAssemblies()
+    {
+        return _pluginAssemblies.AsReadOnly();
+    }
+
     /// <summary>
     /// Check if "candidateType" is a candidate for being instanciated as Type "serviceType"
     /// </summary>
