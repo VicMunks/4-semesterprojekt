@@ -21,6 +21,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+
     <ProjectReference Include="..\Common.AssetController\Common.AssetController.csproj" />
     <ProjectReference Include="..\Common.ProductionHandler\Common.ProductionHandler.csproj" />
     <ProjectReference Include="..\Common\Common.csproj" />

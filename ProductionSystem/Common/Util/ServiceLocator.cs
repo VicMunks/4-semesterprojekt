@@ -7,6 +7,7 @@ public sealed class ServiceLocator
     public static ServiceLocator Instance { get; } = new ServiceLocator();
 
     private readonly List<Assembly> _pluginAssemblies = new();
+    private readonly Dictionary<string, Assembly> _pluginRegistry = new();
     private readonly Dictionary<Type, List<object>> _serviceRegistry = new();
 
     private ServiceLocator()
@@ -61,6 +62,11 @@ public sealed class ServiceLocator
         return services;
     }
 
+    public IReadOnlyList<Assembly> GetPluginAssemblies()
+    {
+        return _pluginAssemblies.AsReadOnly();
+    }
+
     /// <summary>
     /// Check if "candidateType" is a candidate for being instanciated as Type "serviceType"
     /// </summary>
@@ -87,7 +93,13 @@ public sealed class ServiceLocator
         {
             var asm = Assembly.LoadFrom(dll);
             _pluginAssemblies.Add(asm);
-            Console.WriteLine($"loaded: {asm.FullName}");
+            if (asm.FullName == null)
+                continue;
+
+            string asmName = asm.FullName.Split(',')[0];
+
+            _pluginRegistry.Add(asmName, asm);
+            Console.WriteLine($"loaded: {asmName}");
         }
     }
 }

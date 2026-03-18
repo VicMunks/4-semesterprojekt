@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using CommonProductionHandler;
 using Common.Util;
+
 namespace APIController.Controllers;
 
 [ApiController]
@@ -9,15 +10,31 @@ public class Controller : ControllerBase
 {
     public Controller()
     {
-        
+        Console.WriteLine(this.Url);
     }
     
     [HttpPost("Command")]
     public IActionResult PostCommand([FromBody] ProductionCommand command)
     {
-        GetCommandableServices();
-        throw new NotImplementedException();
+        if (command.Name == null)
+            return BadRequest(command);
+        
+        //var result = GetCommandableServices()[0].SendCommand(command);
+
+        Console.WriteLine(command.Name);
+
+        return Ok(command);
     }
+
+    /*
+    
+    {
+        public required string Name { get; set; }
+        public Dictionary<string,string>? Parameters {get; set;}
+    
+    }
+    
+    */
 
     [HttpPost("Resume")]
     public IActionResult PostResume()
