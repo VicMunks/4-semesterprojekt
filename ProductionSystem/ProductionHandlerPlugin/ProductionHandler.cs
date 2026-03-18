@@ -8,9 +8,11 @@ namespace ProductionHandlerPlugin;
 
 public class ProductionHandler : IProductionDataSource
 {
+    
+
     private Dictionary<AssetEnum, IAssetController> _controllerRegistry;
-    public event EventHandler<ProductionEvent> EventHandler; // raise event on this, to notify ProductionDataSource
-    private Order _currentOrder;
+    public event EventHandler<ProductionEvent>? EventHandler; // raise event on this, to notify ProductionDataSource
+    private Order? _currentOrder = null;
     private ProductionState _state;
 
     public ProductionHandler()
@@ -21,16 +23,24 @@ public class ProductionHandler : IProductionDataSource
 
         foreach (IAssetController controller in GetAssetControllers())
         {
-            controller.Connect();
-            _controllerRegistry.Add(controller.GetAssetEnum(), controller);
+            controller.ProductionEventHandler += OnProductionEvent;
+            //controller.Connect();
+            //_controllerRegistry.Add(controller.GetAssetEnum(), controller);     
         }
+    }
+
+    private void OnProductionEvent(object? sender, ProductionEvent e)
+    {
+        
     }
 
     /// <summary>
     /// When a new order is added to orderhandler's queue, this is invoked
     /// </summary>
-    private void OnNewOrder(object sender, EventArgs e)
+    private void OnNewOrder(object? sender, EventArgs e)
     {
+        Console.WriteLine("New Order Event in ProductionHandler");
+        /*
         if (_state != ProductionState.idle)
             return;
 
@@ -39,6 +49,7 @@ public class ProductionHandler : IProductionDataSource
             _currentOrder = OrderHandler.Instance.OrderQueue.Dequeue();
             StartProduction();
         }
+        */
     }
 
     private void OnProductionComplete(ProductionEvent e)

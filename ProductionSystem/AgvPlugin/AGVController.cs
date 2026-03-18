@@ -3,11 +3,6 @@ namespace AGVController;
 using CommonAssetController;
 using Common.Data;
 using System.Net.Http;
-using System.Text;
-using System.Text.Json;
-using static System.Net.WebRequestMethods;
-using System.Security.AccessControl;
-using System.Net.ServerSentEvents;
 
 public class AGVController : IAssetController
 {
@@ -15,6 +10,8 @@ public class AGVController : IAssetController
     private readonly string baseUrl = "http://localhost:8082/v1";
 
     private Queue<Item> _heldItems;
+
+    public event EventHandler<ProductionEvent>? ProductionEventHandler;
 
     public AGVController()
     {

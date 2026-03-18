@@ -5,11 +5,17 @@ namespace ProductionHandlerPlugin;
 
 public class RequestHandler : IResumable, IStopable, IResetable, ICommandable
 {
+    public RequestHandler()
+    {
+        GetProductionHandler();
+    }
+
     public Task SendCommand(ProductionCommand command)
     {
         switch (command.Name)
         {
             case "order":
+                Console.WriteLine("order command");
                 OrderHandler.Instance.AddOrderCommandToQueue(command);
                 return Task.CompletedTask;
             

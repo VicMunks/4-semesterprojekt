@@ -13,7 +13,7 @@ public class OrderHandler
 
     public Queue<Order> OrderQueue { get { return _orderQueue; } }
 
-    public event EventHandler NewOrder;
+    public event EventHandler? NewOrder;
 
     private OrderHandler()
     {
@@ -22,14 +22,20 @@ public class OrderHandler
 
     public void AddOrderCommandToQueue(ProductionCommand command)
     {
-        Order order = ParseCommandToOrder(command);
-        _orderQueue.Append(order);
-        NewOrder.Invoke(this, null);
+        //Order order = ParseCommandToOrder(command);
+        //_orderQueue.Append(order);
+
+        
+        NewOrder?.Invoke(this, EventArgs.Empty);
+        Console.WriteLine("Add order to queue");
+        
+        
     }
 
     public Order ParseCommandToOrder(ProductionCommand command)
     {
         //command.Parameters;
-        throw new NotImplementedException();
+        //throw new NotImplementedException();
+        return new Order();
     }
 }

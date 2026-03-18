@@ -1,11 +1,13 @@
-namespace CommonAssetController 
+using Common.Data;
+namespace CommonAssetController;
+
+public interface IAssetController
 {
-	public interface IAssetController
-	{
-		public Task<bool> Connect();
-		public Task<bool> Disconnect();
-		public Task SendCommand(AssetCommand command);
-		public Task<string> ReadStatus();
-		public AssetEnum GetAssetEnum();
-	}
+	public Task<bool> Connect();
+	public Task<bool> Disconnect();
+	public Task SendCommand(AssetCommand command);
+
+	// To notify "ProductHandler" that new production data is avaliable, use ".invoke" on the eventhandler 
+	public event EventHandler<ProductionEvent> ProductionEventHandler;
+	public AssetEnum GetAssetEnum();
 }

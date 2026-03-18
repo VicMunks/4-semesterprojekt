@@ -16,12 +16,12 @@ public class Controller : ControllerBase
     [HttpPost("Command")]
     public IActionResult PostCommand([FromBody] ProductionCommand command)
     {
+        Console.WriteLine($"command name {command.Name}");
+
         if (command.Name == null)
             return BadRequest(command);
         
-        //var result = GetCommandableServices()[0].SendCommand(command);
-
-        Console.WriteLine(command.Name);
+        GetCommandableServices()[0].SendCommand(command);
 
         return Ok(command);
     }

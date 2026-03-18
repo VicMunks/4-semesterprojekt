@@ -1,5 +1,6 @@
 namespace AssemblyLineController;
 
+using Common.Data;
 using CommonAssetController;
 using MQTTnet;
 using MQTTnet.Packets;
@@ -19,6 +20,8 @@ public class AssemblyLineController : IAssetController
     {
         WriteIndented = true
     };
+
+    public event EventHandler<ProductionEvent>? ProductionEventHandler;
 
     public AssemblyLineController()
     {

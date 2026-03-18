@@ -1,9 +1,12 @@
 ﻿namespace WarehouseController;
 
+using Common.Data;
 using CommonAssetController;
 
 public class WarehouseController : IAssetController
 {
+    public event EventHandler<ProductionEvent>? ProductionEventHandler;
+
     public AssetEnum GetAssetEnum()
     {
         return AssetEnum.warehouse;
@@ -29,7 +32,7 @@ public class WarehouseController : IAssetController
         throw new NotImplementedException();
     }
 
-    Task<string> IAssetController.ReadStatus()
+    Task<string> ReadStatus()
     {
         throw new NotImplementedException();
     }

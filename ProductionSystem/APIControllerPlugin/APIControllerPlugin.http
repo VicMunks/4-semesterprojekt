@@ -9,7 +9,7 @@ POST {{APIControllerPlugin_HostAddress}}/ProductionSystem/Command
 Content-Type: application/json
 
 {
-	"Name": "StartProduction",
+	"Name": "order",
 	"Parameters": {
 		"orderId": "1234",
 		"priority": "high"
